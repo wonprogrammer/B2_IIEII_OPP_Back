@@ -13,58 +13,31 @@
 
 ## API 명세서
 - 유화 변환
+
 |기능|Method|URL|request|response|
-|----|----|----|----|----|
+|---|---|---|---|---|
 |공통 headers|||Headers:{Authorization: Bearer access_token }||
-|1. 메인화면 전체 게시글 조회|GET|/||[{’article’:article}]|
-|2. 유화로 바꾸기 - 1.이미지 업로드|GET|/articles/imgtoop/||{’user’:id’img’:img_id}|
-|2. 유화로 바꾸기 - 1. 이미지 업로드|POST|/articles/imgtoop/|Body:
-{’user’:user,
-’input_img’:input_img,
-’output_img’:output_img}| {
-’user’:id,
-’img’:img_id,
-}|
+|1. 메인화면 전체 게시글 조회|GET|/||{”id”:article_id,”title”:title,”content”:content,”img”:img_id}|
+|2. 유화로 바꾸기 - 1. 이미지 업로드|POST|/articles/imgtoop/|Body:{”user”:user,”input_img”:input_img”output_img”:output_img}| {”user”:id,”img”:img_id,}|
 |3. 유화로 바꾸기 - 2. 게시물 등록|GET|/articles/imgtoop/{img_id}/||{”img”:output_img}|
-|3. 유화로 바꾸기 - 2. 게시물 등록|POST|/articles/imgtoop/{img_id}/|Body:
-{’user’:user, ‘img’:output_img,’title’:title, ‘content’:content}|{
-’img’:output_img,
-’img_content’:content,
-}|
+|3. 유화로 바꾸기 - 2. 게시물 등록|POST|/articles/imgtoop/{img_id}/|Body:{”user”:user, ”img”:output_img,”title”:title, ”content”:content}|{”img”:output_img,”img_content”:content,}|
 |4. 이미지 게시글 디테일|GET|/articles/{post_id}/detail/||{’user’:id,’img’:img_id}|
-|4. 이미지 게시글 디테일|PUT|/articles/{post_id}/detail/|Body:
-{’title’:title, ‘content’:content}|{
-’title’:title,
-’content:content
-}|
+|4. 이미지 게시글 디테일|PUT|/articles/{post_id}/detail/|Body:{”title”:title, ”content”:content}|{”title”:title,”content”:content}|
 |4. 이미지 게시글 디테일|DELETE|/articles/{post_id}/detail/||“Delete”|
-|5. 이미지 게시글 댓글|POST|/articles/{post_id}/detail/|Body:
-{’comment’:comment}|{
-’user’:id,
-’comment’:comment
-}|
-|5. 이미지 게시글 댓글|PUT|/articles/{post_id}/comment/{comment_id}|Body:
-{’comment’:comment}|{
-’user’:id,
-’comment’:comment
-}|
+|5. 이미지 게시글 댓글|POST|/articles/{post_id}/detail/|Body:{”comment”:comment}|{”user”:id,”comment”:comment}|
+|5. 이미지 게시글 댓글|PUT|/articles/{post_id}/comment/{comment_id}|Body:{”comment’:comment}|{”user”:id,”comment”:comment}|
 |5. 이미지 게시글 댓글|DELETE|/articles/{post_id}/comment/{comment_id}||“Delete”|
-|6. 이미지 게시글 좋아요|POST|/articles/{post_id}/likes||{
-’user’:id,
-’likes”:like
-}|
+|6. 이미지 게시글 좋아요|POST|/articles/{post_id}/likes|(언라이크 일때){”likes’:True}, (라이크 일때){”likes’:False}|{”user”:id,”likes”:like}|
 
 - User
 
 |기능|Method|URL|request|response|
-|----|----|----|----|----|
+|---|---|---|---|---|
 |회원가입|POST|/users/signup|Body :{”username”:”username”,”password”:”password”}|{”message”:”가입완료!”}|
 |로그인 jwt토큰생성|POST|/users/api/token|Body :{”username”:”username”,”password”:”password”}|{”message”:”가입완료!”}|
 |로그아웃|POST|/users/logout|||
-|마이 프로필|GET|/users/{user_id}/profile|Headers:{
-Authorization: Bearer access_token }|{ "profile_img": profile_img_url}|
-|마이 프로필 이미지 수정|PUT|/users/{user_id}/profile|Body:
-{"profile_img": profile_img_url}|{”message”:”수정완료!”}|
+|마이 프로필|GET|/users/{user_id}/profile|Headers:{Authorization: Bearer access_token }|{ "profile_img": profile_img_url}|
+|마이 프로필 이미지 수정|PUT|/users/{user_id}/profile|Body:{"profile_img": profile_img_url}|{”message”:”수정완료!”}|
 
 
 ## ERD
