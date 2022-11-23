@@ -122,6 +122,8 @@ USE_I18N = True
 USE_TZ = True
 
 
+STATIC_URL = "static/"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
@@ -174,5 +176,5 @@ CORS_ALLOW_ALL_ORIGINS = True
 STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "/media/"

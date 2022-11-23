@@ -24,4 +24,3 @@ class Image(models.Model):
     image_user = models.ForeignKey(User, on_delete=models.CASCADE)
     input_image = models.ImageField(null=True)
     output_image = models.ImageField(null=True)
-

@@ -3,14 +3,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from oilpainting import serializers
-from oilpainting.models import Article
-from .models import Image
-from oilpainting.serializers import ArticleListSerializer, ArticleCreateSerializer
-from .serializers import InputImageSerializer
+from .models import Image, Article
+from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleListSerializer
 from nst import styletransfer
 
 
+# Create your views here.
 
 # 게시글의 전체 리스트(GET) + 게시글 작성하기(POST)
 class ArticleView(APIView):
@@ -31,7 +29,6 @@ class ArticleView(APIView):
 
 
 
-
 class LikeView(APIView):
     # 좋아요 한적 없으면 post 가능하게 / 있으면 아무기능 없게
     def post(self, request, article_id):
@@ -42,7 +39,6 @@ class LikeView(APIView):
         else:
             article.likes.add(request.user)
             return Response("like", status=status.HTTP_200_OK)
-
 
 
 
@@ -61,3 +57,6 @@ class ImageUploadview(APIView):
             return Response("저장 완료", status=status.HTTP_200_OK)
         else:
             return Response("실패", status=status.HTTP_400_BAD_REQUEST)
+
+
+    
