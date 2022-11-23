@@ -1,14 +1,16 @@
 from rest_framework.generics import get_object_or_404
-from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
 from oilpainting import serializers
 from oilpainting.models import Article
-from oilpainting.serializers import ArticleSerializer, ArticleListSerializer, ArticleCreateSerializer
-from django.db.models import Q
+from .models import Image
+from oilpainting.serializers import ArticleListSerializer, ArticleCreateSerializer
+from .serializers import InputImageSerializer
+from nst import styletransfer
 
 
-# Create your views here.
 
 # 게시글의 전체 리스트(GET) + 게시글 작성하기(POST)
 class ArticleView(APIView):
@@ -40,3 +42,22 @@ class LikeView(APIView):
         else:
             article.likes.add(request.user)
             return Response("like", status=status.HTTP_200_OK)
+
+
+
+
+# 이미지 업로드 - 유화 변환 기능
+class ImageUploadview(APIView):
+    def post(self, request):
+        input_img_serializer = InputImageSerializer(data=request.data)
+        dnn_num = request.data['number']
+        if input_img_serializer.is_valid():
+            input_img_serializer.save(image_user=request.user)
+            
+            # 이미지 변환 함수 호출
+            latest_idx = Image.objects.order_by('-pk')[0].pk
+            styletransfer(latest_idx, dnn_num)
+            
+            return Response("저장 완료", status=status.HTTP_200_OK)
+        else:
+            return Response("실패", status=status.HTTP_400_BAD_REQUEST)

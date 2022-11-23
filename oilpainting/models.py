@@ -9,8 +9,6 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     
-    # 이미지가 media파일에 몰리는 경우를 대비해 media 폴더에 년/월로 나뉘어 업로드 되게 만들어 준다.
-    image = models.ImageField(blank=True, upload_to='%Y/%m/')
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -19,3 +17,11 @@ class Article(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+
+
+class Image(models.Model):
+    image_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    input_image = models.ImageField(null=True)
+    output_image = models.ImageField(null=True)
+

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from oilpainting.models import Article
+from oilpainting.models import Article, Image
 
 
 
@@ -36,7 +36,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         # 3. likes_count : 좋아요 수 보여주는 필드 추가
-        fields = ("user", "title", "content", "image", "update_at", "likes_count")
+        fields = ("user", "title", "content", "update_at", "likes_count")
     # 원래 여기서 user 값은 id 값으로 들어 왔었지만 그럼 user가 누군지 정확히 알 수 없기 때문에 14~17번 코드의 정의로 user 값에 email이 들어가도록 설정해준다.
 
 
@@ -44,4 +44,12 @@ class ArticleListSerializer(serializers.ModelSerializer):
 class ArticleCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ("title", "image", "content")
+        fields = ("title", "content")
+
+
+
+
+class InputImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fileds = ("input_image",)
