@@ -5,7 +5,7 @@ class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         # username로 회원가입
         if not username:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Users must have an username')
 
         user = self.model(
             username = username,
