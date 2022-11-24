@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Image, Article
-from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleSerializer,ArticleDetailSerializer,ArticleListSerializer,ArticleCommentSerializer,ArticleCommentCreateSerializer
+from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleSerializer,ArticleDetailSerializer,ArticleEditSerializer,ArticleCommentSerializer,ArticleCommentCreateSerializer
 from nst import styletransfer
 
 
@@ -70,7 +70,7 @@ class ArticleDetailView(APIView):
     
     def put(self, request, article_id):
         article = get_object_or_404(Article,id=article_id)
-        article_serializer = ArticleCreateSerializer(article,data=request.data)
+        article_serializer = ArticleEditSerializer(article,data=request.data)
         if request.user == article.article_user:
             if article_serializer.is_valid():
                 article_serializer.save()
@@ -102,5 +102,12 @@ class ArticleCommentView(APIView):
             return Response(article_serializer.data,status=status.HTTP_201_CREATED)
         else:
             return Response(article_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-        
+
+class LikeArticleView(APIView):
+    def get(self, request, user_id):
+        me = request.user
+        liked_articles = me.liked_article.all()
+        like_article_serializer = ArticleSerializer(liked_articles, many=True)
+
+        return Response(like_article_serializer.data, status=status.HTTP_200_OK)
         
