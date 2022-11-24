@@ -26,6 +26,11 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['title','content','img']
+
+class ArticleEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ['title','content']
         
 class ImageSerializer(serializers.ModelSerializer):
    class Meta:
@@ -63,11 +68,11 @@ class ArticleSerializer(serializers.ModelSerializer): # main get
         fields = ['id','img','article_user','likes','likes_count']
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
+    article_user = serializers.SerializerMethodField()
     comment_set = ArticleCommentSerializer(many=True)
     img = ImageSerializer()
     
-    def get_user(self,obj):
+    def get_article_user(self,obj):
         return obj.article_user.username
     
     class Meta:

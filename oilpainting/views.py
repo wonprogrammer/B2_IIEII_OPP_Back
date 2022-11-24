@@ -2,8 +2,8 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Image, Article, User
-from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleSerializer,ArticleDetailSerializer,ArticleListSerializer,ArticleCommentSerializer,ArticleCommentCreateSerializer
+from .models import Image, Article
+from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleSerializer,ArticleDetailSerializer,ArticleEditSerializer,ArticleCommentSerializer,ArticleCommentCreateSerializer
 from nst import styletransfer
 
 
@@ -70,7 +70,7 @@ class ArticleDetailView(APIView):
     
     def put(self, request, article_id):
         article = get_object_or_404(Article,id=article_id)
-        article_serializer = ArticleCreateSerializer(article,data=request.data)
+        article_serializer = ArticleEditSerializer(article,data=request.data)
         if request.user == article.article_user:
             if article_serializer.is_valid():
                 article_serializer.save()
