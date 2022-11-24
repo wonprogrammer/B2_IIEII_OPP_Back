@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from users.models import User
+from oilpainting.models import Image
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from oilpainting.serializers import ArticleListSerializer
 
@@ -48,7 +49,7 @@ class UserprofileImageCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("username", 'profile_img')
-        
+
 
 # 팔로잉 하는 유저 목록을 간단히 가져오기위한 시리얼라이저
 class FollowingBaseSerializer(serializers.ModelSerializer):

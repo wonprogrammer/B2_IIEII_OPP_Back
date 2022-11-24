@@ -34,8 +34,6 @@ class ImageSerializer(serializers.ModelSerializer):
         
 class ArticleListSerializer(serializers.ModelSerializer):
     article_user = serializers.SerializerMethodField()
-    comment = ArticleCommentSerializer(many=True)
-    img = ImageSerializer()
 
     # 1. list를 불러올때 좋아요 갯수도 불러오고싶을때! + commnets_count도 동일!
     likes_count = serializers.SerializerMethodField()

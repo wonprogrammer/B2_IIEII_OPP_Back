@@ -116,6 +116,7 @@ class ProfileView(APIView):
         else:
             return Response({"message":f"${update_serializer.errors}"}, status=status.HTTP_400_BAD_REQUEST)
 
+
 # 팔로우 기능
 class FollowView(APIView):
     # 팔로우 정보 테스트용
@@ -133,3 +134,4 @@ class FollowView(APIView):
         else:
             person.followers.add(request.user)
             return Response("follow", status=status.HTTP_200_OK)
+
