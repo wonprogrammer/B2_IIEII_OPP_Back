@@ -84,7 +84,5 @@ class SignoutView(APIView) :
         return response
 
 
-
-        
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
