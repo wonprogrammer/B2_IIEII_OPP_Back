@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from oilpainting.models import Image, Article
+from oilpainting.models import Image, Article,Comment
 
 
 class InputImageSerializer(serializers.ModelSerializer):
@@ -7,6 +7,16 @@ class InputImageSerializer(serializers.ModelSerializer):
         model = Image
         fields = ("input_image",)
         
+class ArticleCommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        
+class ArticleCommentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ('content',)     
+           
 class ArticleImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
@@ -16,8 +26,12 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['title','content','img']
-
-
+        
+class ImageSerializer(serializers.ModelSerializer):
+   class Meta:
+        model = Image
+        fields = ['input_image','output_image']
+        
 class ArticleListSerializer(serializers.ModelSerializer):
     article_user = serializers.SerializerMethodField()
 
@@ -36,22 +50,27 @@ class ArticleListSerializer(serializers.ModelSerializer):
         model = Article
         # 3. likes_count : 좋아요 수 보여주는 필드 추가
         fields = ("article_user", "title", "content", "likes_count")
+        
 
-        
-        
-class ImageSerializer(serializers.ModelSerializer):
-   class Meta:
-        model = Image
-        fields = ['input_image','output_image']
 
 class ArticleSerializer(serializers.ModelSerializer): # main get
     img = ImageSerializer()
+    likes_count = serializers.SerializerMethodField()
+    def get_likes_count(self, obj):
+        return obj.likes.count()
     class Meta:
         model = Article
-        fields = ['id','img','article_user','likes']
+        fields = ['id','img','article_user','likes','likes_count']
 
 class ArticleDetailSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+    comment_set = ArticleCommentSerializer(many=True)
     img = ImageSerializer()
+    
+    def get_user(self,obj):
+        return obj.article_user.username
+    
     class Meta:
         model = Article
         fields = '__all__'
+        
