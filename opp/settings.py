@@ -123,13 +123,15 @@ USE_TZ = True
 
 
 STATIC_URL = "static/"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'users.User'
 
 SIMPLE_JWT = {  # jwt customizing / token lifetime
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000), # 개발 시 로그인 활성시간 늘려주었다가 수정 후 배포하기
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=300), # 개발 시 로그인 활성시간 늘려주었다가 수정 후 배포하기
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': False,
@@ -169,12 +171,3 @@ SWAGGER_SETTINGS = {
         }
     },
 }
-
-
-CORS_ALLOW_ALL_ORIGINS = True
-
-STATIC_ROOT = BASE_DIR / "static"
-STATIC_URL = "/static/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = "/media/"

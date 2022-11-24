@@ -5,9 +5,6 @@ from users.serializers import UserSerializer, CustomTokenObtainPairSerializer, U
 from users.models import User
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.generics import get_object_or_404
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-)
 
 
 class UserView(APIView):
@@ -22,7 +19,6 @@ class UserView(APIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
-
 
 
 

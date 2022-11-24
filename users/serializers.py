@@ -33,11 +33,11 @@ class UserprofileSerializer(serializers.ModelSerializer):
     article_set = ArticleListSerializer(many=True)
 
     # 내가 좋아요 한 게시글 보기
-    like_articles = ArticleListSerializer(many=True)
+    liked_article = ArticleListSerializer(many=True)
 
     class Meta:
         model = User
-        fields = ("username", 'profile_img', 'article_set', 'like_articles')
+        fields = ("username", 'profile_img', 'article_set', 'liked_article')
 
 
 class UserprofileImageCreateSerializer(serializers.ModelSerializer):
