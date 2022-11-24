@@ -98,7 +98,7 @@ class ArticleCommentView(APIView):
     def post(self,request,article_id):
         article_serializer = ArticleCommentCreateSerializer(data=request.data)
         if article_serializer.is_valid():
-            article_serializer.save(user=request.user,article_id = article_id)
+            article_serializer.save(article_user=request.user,article_id = article_id)
             return Response(article_serializer.data,status=status.HTTP_201_CREATED)
         else:
             return Response(article_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
