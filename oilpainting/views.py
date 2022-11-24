@@ -2,7 +2,7 @@ from rest_framework.generics import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Image, Article
+from .models import Image, Article, User
 from .serializers import InputImageSerializer,ArticleImageSerializer,ArticleCreateSerializer, ArticleSerializer,ArticleDetailSerializer,ArticleListSerializer,ArticleCommentSerializer,ArticleCommentCreateSerializer
 from nst import styletransfer
 
@@ -102,5 +102,12 @@ class ArticleCommentView(APIView):
             return Response(article_serializer.data,status=status.HTTP_201_CREATED)
         else:
             return Response(article_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-        
+
+class LikeArticleView(APIView):
+    def get(self, request, user_id):
+        me = request.user
+        liked_articles = me.liked_article.all()
+        like_article_serializer = ArticleSerializer(liked_articles, many=True)
+
+        return Response(like_article_serializer.data, status=status.HTTP_200_OK)
         
