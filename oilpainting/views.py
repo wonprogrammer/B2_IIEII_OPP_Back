@@ -22,6 +22,8 @@ class ImageUploadview(APIView):
             return Response("저장 완료", status=status.HTTP_200_OK)
         else:
             return Response("실패", status=status.HTTP_400_BAD_REQUEST)
+
+       
         
 class ArticleView(APIView):
     def post(self, request):
@@ -51,11 +53,14 @@ class LikeView(APIView):
             return Response("like", status=status.HTTP_200_OK)
         
 
+
 class MainView(APIView):
     def get(self, request):
         articles = Article.objects.all()
         article_serializer = ArticleSerializer(articles, many = True)
         return Response(article_serializer.data, status = status.HTTP_200_OK )
+
+
 
 class ArticleDetailView(APIView):
     def get(self, request, article_id):
