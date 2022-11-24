@@ -142,5 +142,4 @@ media/
 
 *.json
 
-musiclist/settings.py
-
+*.t7
