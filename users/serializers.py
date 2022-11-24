@@ -60,7 +60,7 @@ class FollowingBaseSerializer(serializers.ModelSerializer):
 # 팔로우와 관련된 정보들을 담는 시리얼라이저
 class FollowSerializer(serializers.ModelSerializer):
     # 팔로잉 하는 유저 정보
-    followinglist = FollowingBaseSerializer(many=True)
+    followings = FollowingBaseSerializer(many=True)
     
     # 팔로잉 수
     following = serializers.SerializerMethodField()
@@ -74,4 +74,4 @@ class FollowSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = User
-        fields = ("id", "username", "follower", "following", "followinglist", )
+        fields = ("id", "username", "follower", "following", "followings", )
