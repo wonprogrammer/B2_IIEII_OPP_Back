@@ -137,11 +137,12 @@ runs/
 0002_playlist_is_main.py
 0003_music_music_img.py
 recommend/
-media/
-.vscode/
 
+.vscode/
+media/
 *.json
 
 *.t7
+
 
 migrations/
