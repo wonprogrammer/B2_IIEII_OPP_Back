@@ -119,11 +119,11 @@ class ProfileView(APIView):
 
 # 팔로우 기능
 class FollowView(APIView):
-    # 팔로우 정보 테스트용
+    # 팔로우 정보 
     def get(self, request, user_id):
-        users = User.objects.all()
-        users_serializer = FollowSerializer(users, many=True)
-        return Response(users_serializer.data, status=status.HTTP_200_OK)
+        follows = User.objects.all()
+        follows_serializer = FollowSerializer(follows, many=True)
+        return Response(follows_serializer.data, status=status.HTTP_200_OK)
     
     # 팔로우/언팔로우 기능
     def post(self, request, user_id):
