@@ -141,7 +141,8 @@ recommend/
 .vscode/
 
 *.json
-
+media/
+*.t7
 
 
 migrations/
