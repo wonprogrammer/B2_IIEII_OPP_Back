@@ -8,6 +8,11 @@ class InputImageSerializer(serializers.ModelSerializer):
         fields = ("input_image",)
         
 class ArticleCommentSerializer(serializers.ModelSerializer):
+    article_user = serializers.SerializerMethodField()
+   
+    def get_article_user(self, obj):
+        return obj.article_user.username
+
     class Meta:
         model = Comment
         fields = '__all__'
@@ -70,7 +75,11 @@ class ArticleSerializer(serializers.ModelSerializer): # main get
 class ArticleDetailSerializer(serializers.ModelSerializer):
     article_user = serializers.SerializerMethodField()
     comment_set = ArticleCommentSerializer(many=True)
+    likes_count = serializers.SerializerMethodField()
     img = ImageSerializer()
+    
+    def get_likes_count(self, obj):
+        return obj.likes.count()
     
     def get_article_user(self,obj):
         return obj.article_user.username
