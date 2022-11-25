@@ -127,7 +127,9 @@ class FollowView(APIView):
     # 팔로우/언팔로우 기능
     def post(self, request, user_id):
         person = get_object_or_404(User, id=user_id)
-        if person.followers.filter(pk=request.user.pk).exists():
+        if request.user.pk == user_id:
+            return Response({"message":"본인은 팔로우 할 수 없습니다."}, status=status.HTTP_200_OK )
+        elif person.followers.filter(pk=request.user.pk).exists():
             person.followers.remove(request.user)
             return Response("unfollow", status=status.HTTP_200_OK)
         else:
