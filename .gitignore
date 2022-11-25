@@ -139,9 +139,9 @@ runs/
 recommend/
 
 .vscode/
-
-*.json
 media/
+*.json
+
 *.t7
 
 
