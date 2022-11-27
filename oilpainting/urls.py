@@ -8,5 +8,6 @@ urlpatterns = [
         path('<int:article_id>/detail/', views.ArticleDetailView.as_view(), name = 'detail_view'),
         path('<int:article_id>/likes/', views.LikeView.as_view(), name = 'like_view'),
         path('<int:article_id>/comment/',views.ArticleCommentView.as_view()),
-         path('<int:user_id>/likepage/', views.LikeArticleView.as_view(), name = 'like_article_view'),
+        path('<int:user_id>/likepage/', views.LikeArticleView.as_view(), name = 'like_article_view'),
+        path('<int:article_id>/comment/detail/',views.ArticleCommentDetailView.as_view()), 
 ]
