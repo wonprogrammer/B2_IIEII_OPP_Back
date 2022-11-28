@@ -123,7 +123,7 @@ class ArticleCommentDetailView(APIView):
             return Response("권한이 없습니다.",status=status.HTTP_403_FORBIDDEN)
     
     def delete(self,requst,article_id,comment_id):
-        comment = Comment.objects.get(id=comment_id)
+        comment = get_object_or_404(Comment,id=comment_id)        
         if requst.user == comment.article_user:
             comment.delete()
             return Response("삭제 되었습니다.",status=status.HTTP_200_OK)
