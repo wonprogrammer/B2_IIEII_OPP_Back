@@ -10,7 +10,7 @@
 
 
 ## 개발기간
-2022년 11월 2일 ~ 2022년 11월 8일
+2022년 11월 22일 ~ 2022년 11월 28일
 
 
 ## 팀구성
@@ -36,7 +36,10 @@
 
 
 ## Front-end repo
-- [깃헙으로 이동](https://github.com/kbm1933/B2_IIEII_DRF)
+- [깃헙으로 이동](https://github.com/kbm1933/B2_IIEII_OPP_Front)
+
+## Project Intro Notion
+- [노션으로 이동](https://www.notion.so/221122-a90ad7eaa1194801a9631a411a081d2c)
 
 ## Wireframe
 - [피그마로 이동](https://enormous-ragdoll-497.notion.site/221122-a90ad7eaa1194801a9631a411a081d2c)
