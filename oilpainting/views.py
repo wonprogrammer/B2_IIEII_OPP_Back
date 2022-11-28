@@ -105,20 +105,20 @@ class ArticleCommentView(APIView):
         
 class ArticleCommentDetailView(APIView):
     def get(self,request,article_id):
-        article = Article.objects.get(id=article_id)
+        article = get_object_or_404(Article,id=article_id)
         comments = article.comment_set.all()
         article_serializer = ArticleCommentSerializer(comments,many=True)
         return Response(article_serializer.data,status=status.HTTP_200_OK)
     
-    def put(self,request,article_id):
-        article = get_object_or_404(Article,id=article_id)
-        article_serializer = ArticleCommentCreateSerializer(article,data=request.data)
-        if request.user == article.article_user:
-            if article_serializer.is_valid():
-                article_serializer.save()
-                return Response(article_serializer.data,status=status.HTTP_200_OK)
+    def put(self,request,article_id,comment_id):
+        comment = get_object_or_404(Comment,id=comment_id)        
+        if request.user == comment.article_user:
+            comment_serializer = ArticleCommentCreateSerializer(comment,data=request.data)
+            if comment_serializer.is_valid():
+                comment_serializer.save()
+                return Response(comment_serializer.data,status=status.HTTP_200_OK)
             else:
-                return Response(article_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+                return Response(comment_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response("권한이 없습니다.",status=status.HTTP_403_FORBIDDEN)
     
