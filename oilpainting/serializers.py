@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from oilpainting.models import Image, Article,Comment
+from oilpainting.models import Image, Article, Comment
 
 
 class InputImageSerializer(serializers.ModelSerializer):
