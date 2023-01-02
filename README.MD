@@ -57,7 +57,10 @@
 
 ## DB
 - ERD
+
 ![ERD](https://user-images.githubusercontent.com/6766202/204168979-8ec2ee8b-ab9b-4e5e-8a81-afc113c5ebc3.jpg)
 
 
 ## 트러블 슈팅
+
+- [깃헙 위키로 이동](https://github.com/kbm1933/B2_IIEII_OPP_Back/wiki/%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
